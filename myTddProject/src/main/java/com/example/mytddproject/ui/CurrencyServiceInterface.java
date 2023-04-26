@@ -1,9 +1,11 @@
 package com.example.mytddproject.ui;
 
 
+import com.example.mytddproject.dto.DayCurrencyDto;
 import com.example.mytddproject.services.CurrencyService;
 
 import java.util.InputMismatchException;
+import java.util.List;
 import java.util.Scanner;
 
 public class CurrencyServiceInterface {
@@ -47,8 +49,8 @@ public class CurrencyServiceInterface {
         String resultCurrencyCode = inResultCurrencyCode(sourceCurrencyCode);
         double num = inNum();
 
-        //TODO List<DayCurrencyDto> sourceCurrencyList = currencyService.getCurrencyForPeriod(sourceCurrencyCode);
-        //TODO List<DayCurrencyDto> resultCurrencyList = currencyService.getCurrencyForPeriod(resultCurrencyCode);
+        List<DayCurrencyDto> sourceCurrencyList = currencyService.getCurrencyForPeriod(sourceCurrencyCode);
+        List<DayCurrencyDto> resultCurrencyList = currencyService.getCurrencyForPeriod(resultCurrencyCode);
 
         //TODO double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
         //TODO double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
