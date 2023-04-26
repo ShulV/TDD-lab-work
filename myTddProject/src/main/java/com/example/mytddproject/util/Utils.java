@@ -8,6 +8,8 @@ import java.util.TimeZone;
 public class Utils {
     //получать дату в виде форматированной строки
     public static String getStringFormatDate(Date date) {
-        return "13/07/2001";
+        DateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
+        return sdf.format(date);
     }
 }
