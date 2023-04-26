@@ -6,6 +6,8 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import static com.example.mytddproject.util.Utils.getStringFormatDate;
+
 public class CurrencyService {
 
     //Получить список объектов валюты за последнюю неделю
@@ -15,6 +17,9 @@ public class CurrencyService {
 
     //Получить список объектов валюты-рубля за последнюю неделю
     public List<DayCurrencyDto> getRubleCurrencyForPeriod() {
-        return new ArrayList<>();
+        List<DayCurrencyDto> dayCurrencies = new ArrayList<>();
+        String date = getStringFormatDate(new Date(System.currentTimeMillis()));
+        dayCurrencies.add(new DayCurrencyDto(date, "R", 1, "1"));
+        return dayCurrencies;
     }
 }
