@@ -1,16 +1,18 @@
 package com.example.mytddproject.ui;
 
 
+import com.example.mytddproject.services.CurrencyService;
+
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class CurrencyServiceInterface {
 
-//    TODO private final CurrencyService currencyService;
+    private final CurrencyService currencyService;
 
-//    TODO public CurrencyServiceInterface() {
-//        this.currencyService = new CurrencyService();
-//    }
+    public CurrencyServiceInterface() {
+        this.currencyService = new CurrencyService();
+    }
 
     public void run() {
         System.out.println("Вы вошли в программу 'Конвертер валют с возможностью предсказания курсов'!");
