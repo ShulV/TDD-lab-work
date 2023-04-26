@@ -29,5 +29,4 @@ public class CurrencyServiceTests {
         List<DayCurrencyDto> dayCurrencyDtoList = currencyService.getRubleCurrencyForPeriod();
         Assertions.assertThatList(dayCurrencyDtoList);
     }
-
 }
