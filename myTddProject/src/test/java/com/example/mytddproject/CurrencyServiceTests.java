@@ -23,4 +23,11 @@ public class CurrencyServiceTests {
         Assertions.assertThatList(dayCurrencyDtoList);
     }
 
+    @Test
+    void get_ruble_currency_for_period() {
+        CurrencyService currencyService = new CurrencyService();
+        List<DayCurrencyDto> dayCurrencyDtoList = currencyService.getRubleCurrencyForPeriod();
+        Assertions.assertThatList(dayCurrencyDtoList);
+    }
+
 }
