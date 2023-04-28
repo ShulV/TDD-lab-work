@@ -83,4 +83,11 @@ public class CurrencyService {
         return (sourceCurrencyRate / resultCurrencyRate) * num;
     }
 
+    //получить среднее изменение курса (в день) за последние дни
+    public double getCurrencyChange(List<DayCurrencyDto> dayCurrencyList) {
+        int size = dayCurrencyList.size();
+        double startValue = parseFormatDouble(dayCurrencyList.get(0).getValue());
+        double endValue = parseFormatDouble(dayCurrencyList.get(size - 1).getValue());
+        return (endValue - startValue) / size;
+    }
 }

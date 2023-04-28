@@ -161,4 +161,40 @@ class CurrencyServiceTests {
             currencyService.convertCurrency(41.0d, 1.0d, -1344);
         });
     }
+
+    @Test
+    void get_currency_change_growth() {
+        CurrencyService currencyService = new CurrencyService();
+        List<DayCurrencyDto> dayCurrencyDtoList = new ArrayList<>();
+        dayCurrencyDtoList.add(new DayCurrencyDto("22.02.2022", "1", 100, "27,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("23.02.2022", "1", 100, "28,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("24.02.2022", "1", 100, "26,24"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("25.02.2022", "1", 100, "28,04"));
+        double actualChange = currencyService.getCurrencyChange(dayCurrencyDtoList);
+        Assertions.assertEquals(0.14999999999999947d, actualChange);
+    }
+
+    @Test
+    void get_currency_change_depreciation() {
+        CurrencyService currencyService = new CurrencyService();
+        List<DayCurrencyDto> dayCurrencyDtoList = new ArrayList<>();
+        dayCurrencyDtoList.add(new DayCurrencyDto("22.02.2022", "1", 100, "27,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("23.02.2022", "1", 100, "28,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("24.02.2022", "1", 100, "26,24"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("25.02.2022", "1", 100, "23,04"));
+        double actualChange = currencyService.getCurrencyChange(dayCurrencyDtoList);
+        Assertions.assertEquals(-1.1000000000000005d, actualChange);
+    }
+
+    @Test
+    void get_currency_change_no_change_on_average() {
+        CurrencyService currencyService = new CurrencyService();
+        List<DayCurrencyDto> dayCurrencyDtoList = new ArrayList<>();
+        dayCurrencyDtoList.add(new DayCurrencyDto("22.02.2022", "1", 100, "27,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("23.02.2022", "1", 100, "28,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("24.02.2022", "1", 100, "26,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("25.02.2022", "1", 100, "27,44"));
+        double actualChange = currencyService.getCurrencyChange(dayCurrencyDtoList);
+        Assertions.assertEquals(0d, actualChange);
+    }
 }
