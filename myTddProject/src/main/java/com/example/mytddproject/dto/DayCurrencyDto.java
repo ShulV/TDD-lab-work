@@ -1,6 +1,6 @@
 package com.example.mytddproject.dto;
 
-import javax.xml.bind.annotation.*;
+import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement(name = "Record")
 @XmlAccessorType(XmlAccessType.FIELD)

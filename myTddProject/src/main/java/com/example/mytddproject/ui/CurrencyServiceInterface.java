@@ -3,6 +3,7 @@ package com.example.mytddproject.ui;
 
 import com.example.mytddproject.dto.DayCurrencyDto;
 import com.example.mytddproject.services.CurrencyService;
+import jakarta.xml.bind.ValidationException;
 
 import java.util.InputMismatchException;
 import java.util.List;
@@ -16,7 +17,7 @@ public class CurrencyServiceInterface {
         this.currencyService = new CurrencyService();
     }
 
-    public void run() {
+    public void run() throws ValidationException {
         System.out.println("Вы вошли в программу 'Конвертер валют с возможностью предсказания курсов'!");
         while (true) {
             System.out.print("Выберите действие:\n" +
@@ -44,7 +45,7 @@ public class CurrencyServiceInterface {
         }
     }
 
-    public void runConverter() {
+    public void runConverter() throws ValidationException {
         String sourceCurrencyCode = inSourceCurrencyCode();
         String resultCurrencyCode = inResultCurrencyCode(sourceCurrencyCode);
         double num = inNum();
@@ -52,8 +53,8 @@ public class CurrencyServiceInterface {
         List<DayCurrencyDto> sourceCurrencyList = currencyService.getCurrencyForPeriod(sourceCurrencyCode);
         List<DayCurrencyDto> resultCurrencyList = currencyService.getCurrencyForPeriod(resultCurrencyCode);
 
-        //TODO double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
-        //TODO double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
+//        TODO double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
+//        TODO double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
 
         //TODO double resNum = currencyService.convertCurrency(todaySourceCurrencyValue, todayResultCurrencyValue, num);
 
@@ -68,9 +69,9 @@ public class CurrencyServiceInterface {
     //Вывести в консоли варианты выбора валюты
     public void printCurrencyChoice() {
         int counter = 1;
-//        TODO for (List<String> list: currencyService.currencyCodes) {
-//            System.out.println(String.format("\t%d - %s", counter++, list.get(0)));
-//        }
+        for (List<String> list: currencyService.currencyCodes) {
+            System.out.println(String.format("\t%d - %s", counter++, list.get(0)));
+        }
     }
 
     //Выбор исходной валюты
@@ -83,11 +84,11 @@ public class CurrencyServiceInterface {
             printCurrencyChoice();
             try {
                 index = Integer.parseInt(scanner.next());
-// TODO                if (0 < index && index <= currencyService.currencyCodes.size()) {
-//                    return currencyService.currencyCodes.get(index - 1).get(1);
-//                } else {
-//                    System.out.println("Неверный индекс");
-//                }
+                if (0 < index && index <= currencyService.currencyCodes.size()) {
+                    return currencyService.currencyCodes.get(index - 1).get(1);
+                } else {
+                    System.out.println("Неверный индекс");
+                }
             } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Неверный ввод");
             }
@@ -104,16 +105,16 @@ public class CurrencyServiceInterface {
             printCurrencyChoice();
             try {
                 index = Integer.parseInt(scanner.next());
-//  TODO              if (0 < index && index <= currencyService.currencyCodes.size()) {
-//                    String resultCurrencyCode = currencyService.currencyCodes.get(index - 1).get(1);
-//                    if (sourceCurrencyCode != resultCurrencyCode) {
-//                        return resultCurrencyCode;
-//                    } else {
-//                        System.out.println("Исходная и получаемая валюты не должны совпадать");
-//                    }
-//                } else {
-//                    System.out.println("Неверный индекс");
-//                }
+                if (0 < index && index <= currencyService.currencyCodes.size()) {
+                    String resultCurrencyCode = currencyService.currencyCodes.get(index - 1).get(1);
+                    if (sourceCurrencyCode != resultCurrencyCode) {
+                        return resultCurrencyCode;
+                    } else {
+                        System.out.println("Исходная и получаемая валюты не должны совпадать");
+                    }
+                } else {
+                    System.out.println("Неверный индекс");
+                }
             } catch (InputMismatchException | NumberFormatException e) {
                 System.out.println("Неверный ввод");
             }
@@ -137,5 +138,4 @@ public class CurrencyServiceInterface {
             }
         }
     }
-    //
 }
