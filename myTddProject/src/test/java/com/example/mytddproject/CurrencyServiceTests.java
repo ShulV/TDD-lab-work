@@ -108,4 +108,25 @@ class CurrencyServiceTests {
         double actualValue = currencyService.getLastCurrencyValue(dayCurrencyDtoList);
         Assertions.assertEquals(23.04d, actualValue);
     }
+
+    @Test
+    void convert_currency_1() {
+        CurrencyService currencyService = new CurrencyService();
+        double actualValue = currencyService.convertCurrency(80.1d, 1.0d, 40000);
+        Assertions.assertEquals(3204000.0d, actualValue);
+    }
+
+    @Test
+    void convert_currency_2() {
+        CurrencyService currencyService = new CurrencyService();
+        double actualValue = currencyService.convertCurrency(1.0d, 83.0d, 40000);
+        Assertions.assertEquals(481.9277108433735d, actualValue);
+    }
+
+    @Test
+    void convert_currency_zero_num() {
+        CurrencyService currencyService = new CurrencyService();
+        double actualValue = currencyService.convertCurrency(1.0d, 83.0d, 0);
+        Assertions.assertEquals(0.0d, actualValue);
+    }
 }

@@ -71,4 +71,11 @@ public class CurrencyService {
         int n = currencyList.size();
         return parseFormatDouble(currencyList.get(n-1).getValue());
     }
+
+    //Конвертировать валюту
+    public double convertCurrency(double sourceCurrencyRate, double resultCurrencyRate, double num) {
+        //TODO сделать обработку исключений
+        return (sourceCurrencyRate / resultCurrencyRate) * num;
+    }
+
 }
