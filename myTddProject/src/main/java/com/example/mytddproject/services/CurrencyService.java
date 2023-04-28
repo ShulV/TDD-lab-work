@@ -74,7 +74,12 @@ public class CurrencyService {
 
     //Конвертировать валюту
     public double convertCurrency(double sourceCurrencyRate, double resultCurrencyRate, double num) {
-        //TODO сделать обработку исключений
+        if (resultCurrencyRate == 0) {
+            throw new ArithmeticException("Divide by zero error");
+        }
+        if (sourceCurrencyRate < 0 || resultCurrencyRate < 0 || num < 0) {
+            throw new IllegalArgumentException("Someone argument is less than zero");
+        }
         return (sourceCurrencyRate / resultCurrencyRate) * num;
     }
 

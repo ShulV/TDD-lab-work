@@ -129,4 +129,36 @@ class CurrencyServiceTests {
         double actualValue = currencyService.convertCurrency(1.0d, 83.0d, 0);
         Assertions.assertEquals(0.0d, actualValue);
     }
+
+    @Test
+    void convert_currency_zero_rate() {
+        CurrencyService currencyService = new CurrencyService();
+        Assertions.assertThrows(ArithmeticException.class, ()->{
+            currencyService.convertCurrency(1.0d, 0.0d, 1344);
+        });
+    }
+
+    @Test
+    void convert_currency_negative_src_rate() {
+        CurrencyService currencyService = new CurrencyService();
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            currencyService.convertCurrency(-1.0d, 1.0d, 1344);
+        });
+    }
+
+    @Test
+    void convert_currency_negative_res_rate() {
+        CurrencyService currencyService = new CurrencyService();
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            currencyService.convertCurrency(41.0d, -1.0d, 1344);
+        });
+    }
+
+    @Test
+    void convert_currency_negative_num() {
+        CurrencyService currencyService = new CurrencyService();
+        Assertions.assertThrows(IllegalArgumentException.class, ()->{
+            currencyService.convertCurrency(41.0d, 1.0d, -1344);
+        });
+    }
 }
