@@ -53,8 +53,8 @@ public class CurrencyServiceInterface {
         List<DayCurrencyDto> sourceCurrencyList = currencyService.getCurrencyForPeriod(sourceCurrencyCode);
         List<DayCurrencyDto> resultCurrencyList = currencyService.getCurrencyForPeriod(resultCurrencyCode);
 
-//        TODO double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
-//        TODO double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
+        double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
+        double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
 
         //TODO double resNum = currencyService.convertCurrency(todaySourceCurrencyValue, todayResultCurrencyValue, num);
 
