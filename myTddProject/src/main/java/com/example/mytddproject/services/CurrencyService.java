@@ -16,6 +16,7 @@ import java.util.Date;
 import java.util.List;
 
 import static com.example.mytddproject.util.Utils.getStringFormatDate;
+import static com.example.mytddproject.util.Utils.parseFormatDouble;
 
 public class CurrencyService {
 
@@ -65,5 +66,9 @@ public class CurrencyService {
         return dayCurrencies;
     }
 
-
+    //Получить значение валюты из списка валют за последний день
+    public double getLastCurrencyValue(List<DayCurrencyDto> currencyList) {
+        int n = currencyList.size();
+        return parseFormatDouble(currencyList.get(n-1).getValue());
+    }
 }

@@ -3,9 +3,12 @@ package com.example.mytddproject;
 import com.example.mytddproject.dto.DayCurrencyDto;
 import com.example.mytddproject.services.CurrencyService;
 import jakarta.xml.bind.ValidationException;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import static org.assertj.core.api.Assertions.*;
@@ -75,5 +78,34 @@ class CurrencyServiceTests {
         assertEquals(dayCurrency.getValue(), "1");
         assertEquals(dayCurrency.getNominal(), 1);
         assertEquals(dayCurrency.getId(), "R");
+    }
+
+    @Test
+    void get_last_currency_value_from_empty_list() {
+        CurrencyService currencyService = new CurrencyService();
+        Assertions.assertThrows(IndexOutOfBoundsException.class, ()->{
+            currencyService.getLastCurrencyValue(Collections.EMPTY_LIST);
+        });
+    }
+
+    @Test
+    void get_last_currency_value_singleton_list() {
+        CurrencyService currencyService = new CurrencyService();
+        double actualValue = currencyService.getLastCurrencyValue(Collections.singletonList(
+                new DayCurrencyDto("22.02.2022", "1", 100, "27,44")
+        ));
+        Assertions.assertEquals(27.44d, actualValue);
+    }
+
+    @Test
+    void get_last_currency_value_many_elements_list() {
+        CurrencyService currencyService = new CurrencyService();
+        List<DayCurrencyDto> dayCurrencyDtoList = new ArrayList<>();
+        dayCurrencyDtoList.add(new DayCurrencyDto("22.02.2022", "1", 100, "27,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("23.02.2022", "1", 100, "28,44"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("24.02.2022", "1", 100, "26,24"));
+        dayCurrencyDtoList.add(new DayCurrencyDto("25.02.2022", "1", 100, "23,04"));
+        double actualValue = currencyService.getLastCurrencyValue(dayCurrencyDtoList);
+        Assertions.assertEquals(23.04d, actualValue);
     }
 }
