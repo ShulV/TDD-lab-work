@@ -17,6 +17,7 @@ import java.util.List;
 
 import static com.example.mytddproject.util.Utils.getStringFormatDate;
 import static com.example.mytddproject.util.Utils.parseFormatDouble;
+import static java.lang.Math.abs;
 
 public class CurrencyService {
 
@@ -89,5 +90,19 @@ public class CurrencyService {
         double startValue = parseFormatDouble(dayCurrencyList.get(0).getValue());
         double endValue = parseFormatDouble(dayCurrencyList.get(size - 1).getValue());
         return (endValue - startValue) / size;
+    }
+
+
+    //сгенерировать сообщение об изменении курса за последние дни
+    public String genCurrencyChangeMessage(double change) {
+        String message;
+        if (change > 0) {
+            message = String.format("За последние дни курс рос на %.3f в день", change);
+        } else if (change == 0) {
+            message = "За последние дни курс удерживался на одном значении";
+        } else {
+            message = String.format("За последние дни курс падал на %.3f в день", abs(change));
+        }
+        return message;
     }
 }

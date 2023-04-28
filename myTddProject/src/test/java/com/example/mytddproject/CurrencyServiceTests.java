@@ -53,7 +53,7 @@ class CurrencyServiceTests {
         CurrencyService currencyService = new CurrencyService();
         List<DayCurrencyDto> currencyData = currencyService.getCurrencyForPeriod("R01235");
         assertNotNull(currencyData);
-        assertTrue(currencyData.size() <= 7);//api ����� �� �������� �������� � ����������� ��� � ��������
+        assertTrue(currencyData.size() <= 7);//api может не выдавать значение в праздничные дни и выходные
     }
 
     @Test
@@ -196,5 +196,29 @@ class CurrencyServiceTests {
         dayCurrencyDtoList.add(new DayCurrencyDto("25.02.2022", "1", 100, "27,44"));
         double actualChange = currencyService.getCurrencyChange(dayCurrencyDtoList);
         Assertions.assertEquals(0d, actualChange);
+    }
+
+    @Test
+    void get_currency_change_message_growth() {
+        String expectedMsg = "За последние дни курс рос на 5,198 в день";
+        CurrencyService currencyService = new CurrencyService();
+        String actualMsg = currencyService.genCurrencyChangeMessage(5.19788d);
+        Assertions.assertEquals(expectedMsg, actualMsg);
+    }
+
+    @Test
+    void get_currency_change_message_deprecation() {
+        String expectedMsg = "За последние дни курс падал на 0,300 в день";
+        CurrencyService currencyService = new CurrencyService();
+        String actualMsg = currencyService.genCurrencyChangeMessage(-0.3d);
+        Assertions.assertEquals(expectedMsg, actualMsg);
+    }
+
+    @Test
+    void get_currency_change_message_no_change_on_average() {
+        String expectedMsg = "За последние дни курс удерживался на одном значении";
+        CurrencyService currencyService = new CurrencyService();
+        String actualMsg = currencyService.genCurrencyChangeMessage(0d);
+        Assertions.assertEquals(expectedMsg, actualMsg);
     }
 }
