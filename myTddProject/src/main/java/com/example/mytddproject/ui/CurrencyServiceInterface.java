@@ -56,10 +56,10 @@ public class CurrencyServiceInterface {
         double todaySourceCurrencyValue = currencyService.getLastCurrencyValue(sourceCurrencyList);
         double todayResultCurrencyValue = currencyService.getLastCurrencyValue(resultCurrencyList);
 
-        //TODO double resNum = currencyService.convertCurrency(todaySourceCurrencyValue, todayResultCurrencyValue, num);
+        double resNum = currencyService.convertCurrency(todaySourceCurrencyValue, todayResultCurrencyValue, num);
 
         System.out.println("");
-        //TODO System.out.println(num + " (" + sourceCurrencyCode + ") = " + resNum + " (" + resultCurrencyCode + ")");
+        System.out.println(num + " (" + sourceCurrencyCode + ") = " + resNum + " (" + resultCurrencyCode + ")");
 
         //TODO double change = currencyService.getCurrencyChange(resultCurrencyList);
         //TODO String message = currencyService.genCurrencyChangeMessage(change);
