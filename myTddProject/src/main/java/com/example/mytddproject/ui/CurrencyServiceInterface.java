@@ -61,7 +61,7 @@ public class CurrencyServiceInterface {
         System.out.println("");
         System.out.println(num + " (" + sourceCurrencyCode + ") = " + resNum + " (" + resultCurrencyCode + ")");
 
-        //TODO double change = currencyService.getCurrencyChange(resultCurrencyList);
+        double change = currencyService.getCurrencyChange(resultCurrencyList);
         //TODO String message = currencyService.genCurrencyChangeMessage(change);
         //TODO System.out.println(message);
     }
