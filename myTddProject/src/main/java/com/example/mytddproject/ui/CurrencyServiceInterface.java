@@ -62,8 +62,8 @@ public class CurrencyServiceInterface {
         System.out.println(num + " (" + sourceCurrencyCode + ") = " + resNum + " (" + resultCurrencyCode + ")");
 
         double change = currencyService.getCurrencyChange(resultCurrencyList);
-        //TODO String message = currencyService.genCurrencyChangeMessage(change);
-        //TODO System.out.println(message);
+        String message = currencyService.genCurrencyChangeMessage(change);
+        System.out.println(message);
     }
 
     //Вывести в консоли варианты выбора валюты
