@@ -64,4 +64,6 @@ public class CurrencyService {
         dayCurrencies.add(new DayCurrencyDto(date, "R", 1, "1"));
         return dayCurrencies;
     }
+
+
 }

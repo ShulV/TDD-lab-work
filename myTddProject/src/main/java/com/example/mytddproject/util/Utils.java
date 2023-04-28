@@ -12,4 +12,11 @@ public class Utils {
         sdf.setTimeZone(TimeZone.getTimeZone("UTC"));
         return sdf.format(date);
     }
+
+    //парсить строку с запятой в double (например, 29,33)
+    public static double parseFormatDouble(String str) {
+        str = str.replace(',', '.');
+        return Double.parseDouble(str);
+    }
+
 }
